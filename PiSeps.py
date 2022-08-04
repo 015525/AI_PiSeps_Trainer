@@ -35,7 +35,7 @@ class PiSeps :
 
     def count_curl_and_time(self, img):
         angle = self.pose.find_angle(img, 12, 14, 16, draw=False)
-        print(angle)
+        #print(angle)
 
         if angle < 160 and angle > 140 and not self.wrong_position:
             if self.first_enter:
@@ -60,13 +60,14 @@ class PiSeps :
         if self.counter > 10:
             self.counter = 1
 
-        self.check_weight(img, time.time()-self.pTime)
+        #self.check_weight(img, time.time()-self.pTime)
 
-        return self.counter
+        return self.counter, time.time()-self.pTime
+'''
 
     def check_weight(self, img, current_duration_for_curl):
         if (len(self.lm_list) > 16):
-            x16, y16 = self.lm_list[16][1], self.lm_list[16][2]
+            x16, y16 = 950, 320
             if current_duration_for_curl > 2.5 and self.counter > 6 and not self.wrong_position:
                 cv2.putText(img, f'Good job just', (x16+50, y16-70), cv2.FONT_HERSHEY_PLAIN, 2, (0, 255, 0), 2)
                 cv2.putText(img, f'remaining {10 - self.counter}', (x16 + 50, y16 - 25),
@@ -80,3 +81,4 @@ class PiSeps :
                             cv2.FONT_HERSHEY_PLAIN, 2, (0, 0, 255), 2)
                 cv2.putText(img, f'a heavy weight', (x16 + 50, y16 -15),
                             cv2.FONT_HERSHEY_PLAIN, 2, (0, 0, 255), 2)
+'''

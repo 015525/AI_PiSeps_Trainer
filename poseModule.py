@@ -53,8 +53,9 @@ class poseDetector :
         if self.results.pose_landmarks:
             for id,lm in enumerate(self.results.pose_landmarks.landmark) :
                 h,w,c=img.shape
-                cx,cy = int(lm.x*w) , int(lm.y*h)
-                self.lmList.append([id, cx, cy])
+                cx,cy, cz = int(lm.x*w) , int(lm.y*h), int(lm.z*c)
+                #print(cz)
+                self.lmList.append([id, cx, cy, cz])
                 if draw :
                     cv2.circle(img, (cx,cy), 7, (255,0,0), cv2.FILLED)
 
@@ -64,9 +65,9 @@ class poseDetector :
     def find_angle(self,img, p1, p2, p3, draw = True):
         angle = -1
         if len(self.lmList) > p3 and len(self.lmList) > p2 and len(self.lmList) > p1:
-            _,x1,y1 = self.lmList[p1]
-            _, x2, y2 = self.lmList[p2]
-            _, x3, y3 = self.lmList[p3]
+            x1,y1 = self.lmList[p1][1], self.lmList[p1][2]
+            x2, y2, = self.lmList[p2][1], self.lmList[p2][2]
+            x3, y3 = self.lmList[p3][1], self.lmList[p3][2]
 
             angle = math.degrees(math.atan2(y3 - y2, x3 - x2) - math.atan2(y1 - y2, x1 - x2))
 

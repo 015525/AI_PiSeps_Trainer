@@ -29,12 +29,12 @@ def choice() :
         #h2, w2, c2 = img_2.shape
 
         img= generate_image(img, img_1, 5, 240)
-        img = generate_image(img, img_2, 170, 430)
+        img = generate_image(img, img_2, 167, 426)
         #img[5:5 + h1, 220: 220 + w1] = img_1
         #img[330:330 + h2, 330: 330 + w2] = img_2
         cv2.putText(img, f'If ready then ', (200, 210), cv2.FONT_HERSHEY_PLAIN, 2,
                     (255, 0, 0), 2)
-        cv2.rectangle(img, (220, 220), (460, 460), (255, 0, 255), 3)
+        cv2.rectangle(img, (220, 220), (460, 460), (0, 255, 0), 3)
 
         cTime = time.time()
         is_thumb_up, xb1, xb2, yb1 = choice.get_choice(img)

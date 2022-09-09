@@ -60,7 +60,7 @@ class PiSeps :
                 hand_cof = -1
 
             #print(hand_cof)
-            print(int(x1-x2))
+           #print(int(x1-x2))
             if int(x1 - x2) < (-5*hand_cof):
                 self.wrong_position = (hand == "Right")
             else:
@@ -100,12 +100,12 @@ class PiSeps :
             self.first_enter = True
             self.count_flip = False
 
-        if self.counter > 10:
-            self.counter = 1
+        if self.counter == 10:
+            print(f'self.counter is {self.counter}')
+            self.counter = 0
+            return 10, time.time() - self.pTime
 
         #self.check_weight(img, time.time()-self.pTime)
-
-
 
         return self.counter, time.time()-self.pTime
 '''

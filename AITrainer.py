@@ -51,62 +51,69 @@ def aiTrainer() :
     pose = pm.poseDetector(min_detection_confidence=0.8)
     piStat = ps.PiSeps()
     group = 1
+    hand_order = "right"
+
+    timer = 11
     counter = 0
     first_enter = True
-    first_enter_to_finish = True
     hand_cof = 1
     verified_hand = ""
+    first_time_enter=True
     while True :
         success, img = cap.read()
         right_pos, hand = piStat.rightPosture(img)
+        cTime = time.time()
+        if first_time_enter:
+            pTime=cTime
+            first_time_enter=False
+
         if hand == "Right" :
             verified_hand = "Right"
         elif hand == "Left" :
             verified_hand = "Left"
 
-        wrong_pos = piStat.wrongElbowPosition(img, verified_hand)
-
         if verified_hand == "Left" :
             hand_cof= -1
         elif verified_hand == "Right" :
             hand_cof= 1
-        counter, current_duration_for_curl = piStat.count_curl_and_time(img, hand_cof, verified_hand)
+
         coach_img = cv2.imread("Images/coach.jpg")
-        #print(img.shape)
-        #print(coach_img.shape)
+        img = np.concatenate((img, coach_img), axis=1)
 
-        #img = generate_image(img,coach_img, 120, 630)
-        img = np.concatenate((img, coach_img), axis = 1)
-        check_weight(img, current_duration_for_curl, counter, wrong_pos)
+        if timer == 0:
+            wrong_pos = piStat.wrongElbowPosition(img, verified_hand)
+            counter, current_duration_for_curl = piStat.count_curl_and_time(img, hand_cof, verified_hand)
+            print(f'counter in if timer is {counter}')
+            check_weight(img, current_duration_for_curl, counter, wrong_pos)
 
-        #img = coach_img if coach_img.all() != 0 else img
-        #img = cv2.add(img, coach_img)
 
-        #print(wrong_pos)
-        #print(counter)
-        #print(timeForCurl)
+        if cTime - pTime >= 1 and timer > 0:
+            timer-=1
+            pTime = cTime
 
 
         cv2.putText(img, f'Count: {counter}', (10, 50), cv2.FONT_HERSHEY_PLAIN, 2, (255, 0, 0), 2)
         cv2.putText(img, f'Posture Position: {right_pos}', (10, 90), cv2.FONT_HERSHEY_PLAIN, 2, (255, 0, 0), 2)
         cv2.putText(img, f'Hand: {verified_hand}', (10, 130), cv2.FONT_HERSHEY_PLAIN, 2, (255, 0, 0), 2)
         cv2.putText(img, f'Group: {group}', (700, 50), cv2.FONT_HERSHEY_PLAIN, 2, (255, 0, 0), 2)
+        cv2.putText(img, f'Timer: {timer}', (700, 90), cv2.FONT_HERSHEY_PLAIN, 2, (255, 0, 0), 2)
 
-        if counter == 10 :
-            if first_enter :
+        if counter == 10:
+            print(f'in if and counter is {counter}')
+            if first_enter:
                 group += 1
-                #counter = 0
+                #todo change hand every group and set a timer
+                hand_order = "left" if hand_order == "right" else "right"
+                counter = 0
+                timer = 15
                 first_enter = False
 
-        if counter != 10 :
+        if counter != 10:
             first_enter = True
 
-#        if cTime - pTime >= 5 :
-#            group = 4
-        if group == 4 :
+        if group == 5 :
             return True
 
-        #cv2.putText(img, f'FPS {int(fps)}', (10, 70), cv2.FONT_HERSHEY_PLAIN, 3, (255,0,0), 3)
         cv2.imshow("AI Trainer", img)
         cv2.waitKey(1)
 
@@ -174,3 +181,13 @@ count_flip = False
 got_down = True
 first_enter = True
     '''
+
+# img = coach_img if coach_img.all() != 0 else img
+# img = cv2.add(img, coach_img)
+
+# print(wrong_pos)
+# print(counter)
+# print(timeForCurl)
+
+#        if cTime - pTime >= 5 :
+#            group = 4

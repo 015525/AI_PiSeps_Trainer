@@ -34,7 +34,7 @@ def choice() :
         #img[330:330 + h2, 330: 330 + w2] = img_2
         cv2.putText(img, f'If ready then ', (200, 210), cv2.FONT_HERSHEY_PLAIN, 2,
                     (255, 0, 0), 2)
-        cv2.rectangle(img, (220, 220), (460, 460), (0, 255, 0), 3)
+        cv2.rectangle(img, (220, 220), (460, 460), (162, 42, 42), 3)
 
         cTime = time.time()
         is_thumb_up, xb1, xb2, yb1 = choice.get_choice(img)

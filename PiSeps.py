@@ -61,7 +61,7 @@ class PiSeps :
 
             #print(hand_cof)
            #print(int(x1-x2))
-            if int(x1 - x2) < (-5*hand_cof):
+            if int(x1 - x2) < (-10*hand_cof):
                 self.wrong_position = (hand == "Right")
             else:
                 self.wrong_position = (hand == "Left")
@@ -86,7 +86,7 @@ class PiSeps :
                 self.first_enter = False
             self.got_down = True
 
-        if angle < (60) and self.got_down and angle != -1 and not self.wrong_position:
+        if angle < (80) and self.got_down and angle != -1 and not self.wrong_position:
             # print(time.time())
             # print(pTime)
             self.timeForCurl = round(time.time() - self.pTime, 2)

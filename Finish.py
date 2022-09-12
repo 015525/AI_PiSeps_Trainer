@@ -22,7 +22,7 @@ def finish_window() :
         success, img = cap.read()
         img_1 = cv2.imread("Images/start.png")
         img= generate_image(img, img_1, 5, 240)
-        cv2.putText(img, f'See You The Next Exercise', (110, 240), cv2.FONT_HERSHEY_PLAIN, 2, (255, 0, 0), 2)
+        cv2.putText(img, f'See You The Next Exercise !!', (110, 240), cv2.FONT_HERSHEY_DUPLEX, 1, (0, 0, 0), 2)
 
         cTime = time.time()
         if first_enter :

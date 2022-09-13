@@ -1,5 +1,5 @@
 # AI_piSeps_trainer
-A computer vision project aims to make a virtual trainer for piSeps exercise using 25 landmarks detected by  pose estimation upper body model to count the curls while exercising , detect the current working hand , detect the wrong position for the elbow , check if the weight is heavy , detect the Wright posture of the body while exercising, and make a simple schedule for making a complete exercise 
+A computer vision project aims to make a virtual trainer for piSeps exercise using 33 landmarks detected by  pose estimation upper body model to count the curls while exercising , detect the current working hand , detect the wrong position for the elbow , check if the weight is heavy , detect the Wright posture of the body while exercising, and make a simple schedule for making a complete exercise 
 
 ### If a wrong position for the elbow is detected :- 
   AI trainer displays a  warning message  

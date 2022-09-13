@@ -1,6 +1,6 @@
-from choiceLoop import choice
-from AITrainer import aiTrainer
-from Finish import finish_window
+from choice.choiceLoop import choice
+from aiTrainer.AITrainer import aiTrainer
+from finish.Finish import finish_window
 
 start_exercise = choice()
 if start_exercise == "start exercise" :
